@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 28 18:06:26 2026
+
+@author: praveshp
+"""
+
+import h5py
+import dask
+import dask.array
+import dask.dataframe
+
+# Which file to work on; variable is called data
+toWork  = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat";
+f       = h5py.File(toWork, mode='r')
+
+# Get size of dataset
+[rows, cols] = f['/data'].shape
+
+value = dask.delayed(f['/data'])
+
+delayed_df = dask.array.from_delayed(value, (rows,cols), dtype=float)
+
+# Define our lazy mean and standard functions
+lazy_mean = delayed_df.mean(axis=1)
+lazy_std  = delayed_df.std(axis=1)
+
+# Get results
+[mean, std] = dask.compute(lazy_mean, lazy_std)
