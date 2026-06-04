@@ -17,7 +17,7 @@ import pyarrow.csv as pyarrow_csv
 import pyarrow.parquet as pyarrow_parquet
 
 # Resolve paths relative to this script
-workDir    = os.path.realpath(__file__)
+workDir    = os.path.dirname(os.path.realpath(__file__))
 inDir      = os.path.join(workDir, "samples")
 resultsDir = os.path.join(workDir, "results")
 

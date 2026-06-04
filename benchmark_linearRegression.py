@@ -15,7 +15,7 @@ import statistics
 import pickle
 
 # Resolve paths relative to this script
-workDir    = os.path.realpath(__file__)
+workDir    = os.path.dirname(os.path.realpath(__file__))
 resultsDir = os.path.join(workDir, "results")
 
 if not os.path.exists(resultsDir)

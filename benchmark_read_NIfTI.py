@@ -16,11 +16,11 @@ import statistics
 import os
 
 # Resolve paths relative to this script
-workDir    = os.path.realpath(__file__)
+workDir    = os.path.dirname(os.path.realpath(__file__))
 inDir      = os.path.join(workDir, "samples", "NIfTI")
 resultsDir = os.path.join(workDir, "results")
 
-if not os.path.exists(resultsDir)
+if not os.path.exists(resultsDir):
     os.makedirs(resultsDir)
 
 # Settings

@@ -13,7 +13,7 @@ import dask.dataframe
 import os
 
 # Which file to work on; variable is called data
-workDir = os.path.realpath(__file__)
+workDir = os.path.dirname(os.path.realpath(__file__))
 toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat")
 f       = h5py.File(toWork, mode='r')
 
