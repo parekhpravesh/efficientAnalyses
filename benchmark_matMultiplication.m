@@ -1,9 +1,15 @@
 %% Demo: (AB)C vs. A(BC)
-n = 5000;
-
 rng(20260529, 'twister');
 
-% Prepare X variable and true beta coefficients
+% Set paths, relative to this script
+workDir     = fileparts(mfilename('fullpath'));
+resultsDir  = fullfile(workDir, 'results');
+if ~exist(resultsDir, 'dir')
+    mkdir(resultsDir);
+end
+
+% Prepare variables
+n = 5000;
 A = rand(n, n);
 B = rand(n, n);
 C = rand(n, 1);
@@ -19,4 +25,13 @@ tMultiply_fast = timeit(f_solve2);
 clear A B C f*
 
 % Save results
-save('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_matMultiply.mat');
+save(fullfile(resultsDir, 'benchmarks_matMultiply.mat'));
+
+
+function result = doSolve_slow(A, B, C)
+result = (A * B) * C;
+end
+
+function result = doSolve_fast(A, B, C)
+result = A * (B * C);
+end

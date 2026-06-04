@@ -10,20 +10,34 @@ if (!require(RNifti, quietly = TRUE))
 }
 library(RNifti)
 
-if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!require("this.path", quietly = TRUE))
+{
+  install.packages("this.path")
+}
+library(this.path)
+
+if (!require("BiocManager", quietly = TRUE))
+{
+ install.packages("BiocManager")
+}
 BiocManager::install("rhdf5")
 library(rhdf5)
 
-# Benchmark reading different HDF5 formats
-dir_NIfTI         <- "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/"
-file_compressed   <- "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_compressed.mat"
-file_uncompressed <- "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat"
-numRepeats        <- 10
+# Get the path of this script
+workDir    <- this.path::this.dir()
+inDir      <- file.path(workDir, "samples", "NIfTI")
+resultsDir <- file.path(workDir, "results")
+dir.create(resultsDir, showWarnings = FALSE, recursive = TRUE)
+
+# Paths to concatenated data
+file_compressed   <- file.path(inDir, "concatedData_73_compressed.mat")
+file_uncompressed <- file.path(inDir, "concatedData_73_uncompressed.mat")
 
 # Make a list of NIfTI files
-listNIfTI <- list.files(dir_NIfTI, pattern = "*.nii.*")
+listNIfTI <- list.files(inDir, pattern = "*.nii.*")
 
 # Initialize
+numRepeats            <- 10
 t_readNIfTI_oro       <- vector("numeric", length = numRepeats)
 t_readNIfTI_rnifti    <- vector("numeric", length = numRepeats)
 t_rhdf5_compressed    <- vector("numeric", length = numRepeats)
@@ -39,4 +53,4 @@ for (rep in 1:numRepeats)
 }
 
 rm(nii)
-save.image(file="/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readNIfTI_R.rdata")
+save.image(file=file.path(resultsDir, "benchmarks_readNIfTI_R.rdata"))

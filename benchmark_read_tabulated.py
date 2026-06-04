@@ -12,14 +12,20 @@ import pickle
 import pandas
 import polars
 import statistics
+import os
 import pyarrow.csv as pyarrow_csv
 import pyarrow.parquet as pyarrow_parquet
 
+# Resolve paths relative to this script
+workDir    = os.path.realpath(__file__)
+inDir      = os.path.join(workDir, "samples")
+resultsDir = os.path.join(workDir, "results")
+
 # Settings
-toRead_CSV_DK40_33794_70     = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/ABCDlike_tabulated_DK40_33794_70.csv"
-toRead_parquet_DK40_33794_70 = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/ABCDlike_tabulated_DK40_33794_70.parquet"
-toRead_CSV_GP_32945_335      = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/ABCDlike_tabulated_GP_32945_335.csv"
-toRead_parquet_GP_32945_335  = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/ABCDlike_tabulated_GP_32945_335.parquet"
+toRead_CSV_DK40_33794_70     = os.path.join(inDir, "ABCDlike_tabulated_DK40_33794_70.csv")
+toRead_parquet_DK40_33794_70 = os.path.join(inDir, "ABCDlike_tabulated_DK40_33794_70.parquet")
+toRead_CSV_GP_32945_335      = os.path.join(inDir, "ABCDlike_tabulated_GP_32945_335.csv")
+toRead_parquet_GP_32945_335  = os.path.join(inDir, "ABCDlike_tabulated_GP_32945_335.parquet")
 numRepeats = 10
 number = 1
 
@@ -69,7 +75,8 @@ data_to_save = {
     't_polarsPQ_GP_32945_335': t_polarsPQ_GP_32945_335,
 }
     
-with open('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readTabulated_Python.pkl', 'wb') as f:
+outName = os.path.join(resultsDir, "benchmarks_readTabulated_Python.pkl")
+with open(outName, 'wb') as f:
     pickle.dump(data_to_save, f)
     
     

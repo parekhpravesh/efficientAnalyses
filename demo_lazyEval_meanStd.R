@@ -1,3 +1,9 @@
+if (!require("this.path", quietly = TRUE))
+{
+  install.packages("this.path")
+}
+library(this.path)
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
 {
   install.packages("BiocManager")
@@ -10,7 +16,8 @@ library(DelayedMatrixStats)
 library(DelayedArray)
 
 # Load HDF5 file as a DelayedArray; the variable of interest is called data
-inputFile <- "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat"
+workDir         <- this.path::this.dir()
+inputFile       <- file.path(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat")
 dataset_delayed <- HDF5Array(inputFile, name = "data")
 
 # Calculate mean, per column (i.e., voxel-wise)

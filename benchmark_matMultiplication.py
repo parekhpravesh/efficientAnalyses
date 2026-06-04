@@ -10,6 +10,14 @@ import numpy
 import timeit
 import statistics
 import pickle
+import os
+
+# Resolve paths relative to this script
+workDir    = os.path.realpath(__file__)
+resultsDir = os.path.join(workDir, "results")
+
+if not os.path.exists(resultsDir)
+    os.makedirs(resultsDir)
 
 # Settings
 number     = 1
@@ -33,6 +41,7 @@ data_to_save = {
     'tMultiply_slow': tMultiply_slow,
     'tMultiply_fast': tMultiply_fast
 }
-    
-with open('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_matMultiplication_Python.pkl', 'wb') as f:
+
+outName = os.path.join(resultsDir, "benchmarks_matMultiplication_Python.pkl")
+with open(outName, 'wb') as f:
     pickle.dump(data_to_save, f)

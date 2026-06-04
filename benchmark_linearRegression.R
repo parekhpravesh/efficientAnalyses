@@ -1,8 +1,19 @@
+# Install and load required libraries
 if (!require("pracma", quietly = TRUE))
 {
   install.packages("pracma")
 }
+if (!require("this.path", quietly = TRUE))
+{
+  install.packages("this.path")
+}
 library(pracma)
+library(this.path)
+
+# Get the path of this script
+workDir    <- this.path::this.dir()
+resultsDir <- file.path(workDir, "results")
+dir.create(resultsDir, showWarnings = FALSE, recursive = TRUE)
 
 # Settings
 n = 3000;
@@ -35,24 +46,25 @@ for (rep in 1:numRepeats)
 {
   # Fit all y together using lm
   t_linRegression_lm[rep]  <- system.time(lm(y ~ -1 + X))["elapsed"]
-  
+
   # Fit each y separately using lm
   t_linRegression_lm_loop[rep] <- system.time(
     {
       for (cols in 1:v)
       {
        lm(y[,cols] ~ -1 + X)
-      }    
+      }
     }
   )["elapsed"]
-  
+
   # Normal equations with and without inverse
   t_linRegression_normalEqn[rep]        <- system.time(pinv(t(X) %*% X) %*% (t(X) %*% y))["elapsed"]
   t_linRegression_normalEqn_noInv[rep]  <- system.time(solve(t(X) %*% X, t(X) %*% y))["elapsed"]
-  
+
   # Using QR solve
   t_linRegression_QRsolve[rep]          <- system.time(qr.solve(X, y))["elapsed"]
 }
 
+# Clear up and save
 rm(X, y, beta)
-save.image(file="/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_linRegression_R.rdata")
+save.image(file=file.path(resultsDir, "benchmarks_linRegression_R.rdata"))

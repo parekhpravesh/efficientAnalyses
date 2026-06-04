@@ -1,12 +1,19 @@
 %% Demo: Linear regression
 rng(20260529, 'twister');
 
-% Settings
+% Set paths, relative to this script
+workDir     = fileparts(mfilename('fullpath'));
+resultsDir  = fullfile(workDir, 'results');
+if ~exist(resultsDir, 'dir')
+    mkdir(resultsDir);
+end
+
+%% Settings
 n = 30000;
 p = 50;
 v = 1000;
 
-% Simulate X and y
+%% Simulate X and y
 % Same noise level across voxels to keep RAM load low
 % Adding an intercept as the first X variable
 X        = [ones(n, 1), rand(n, p-1)];
@@ -14,14 +21,14 @@ betaTrue = rand(p, v);
 noise    = rand(n, 1);
 y        = X * betaTrue + noise;
 
-% Define functions for timeit
+%% Define functions for timeit
 f_solve_fitlm                = @() solve_fitlm(X, y);
 f_solve_mldivide             = @() solve_mldivide(X, y);
 f_solve_linsolve             = @() solve_linsolve(X, y);
 f_solve_normalEqn            = @() solve_normalEqn(X, y);
 f_solve_normalEqn_withoutInv = @() solve_normalEqn_withoutInv(X, y);
 
-% Get robust timing using timeit
+%% Get robust timing using timeit
 tSolve_fitlm                = timeit(f_solve_fitlm);
 tSolve_mldivide             = timeit(f_solve_mldivide);
 tSolve_linsolve             = timeit(f_solve_linsolve);
@@ -37,8 +44,8 @@ tSolve_normalEqn_withoutInv = timeit(f_solve_normalEqn_withoutInv);
 
 clear X y f*
 
-% Save results
-save('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_linearRegression.mat');
+%% Save results
+save(fullfile(results_dir, 'benchmarks_linearRegression.mat'));
 
 function beta = solve_fitlm(X, y)
 % Initialize

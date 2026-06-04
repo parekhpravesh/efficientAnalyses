@@ -13,17 +13,26 @@ import nibabel
 import glob
 import h5py
 import statistics
+import os
+
+# Resolve paths relative to this script
+workDir    = os.path.realpath(__file__)
+inDir      = os.path.join(workDir, "samples", "NIfTI")
+resultsDir = os.path.join(workDir, "results")
+
+if not os.path.exists(resultsDir)
+    os.makedirs(resultsDir)
 
 # Settings
 numRepeats = 10
 number = 1
 
 # File paths
-mat_compressed   = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_compressed.mat"
-mat_uncompressed = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat"
+mat_compressed   = os.path.join(inDir, "concatedData_73_compressed.mat")
+mat_uncompressed = os.path.join(inDir, "concatedData_73_uncompressed.mat")
 
 # Define the loop for reading multiple NIfTI files
-listNIfTI = glob.glob("/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/*.nii*")
+listNIfTI = glob.glob(inDir, "*.nii*")
 code_loop = """
 for file in listNIfTI:
     nii = nibabel.load(file).get_fdata()
@@ -54,5 +63,6 @@ data_to_save = {
     't_readUncompressed': t_readUncompressed
 }
     
-with open('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readNIfTI_Python.pkl', 'wb') as f:
+outName = os.path.join(resultsDir, "benchmarks_readNIfTI_Python.pkl")
+with open(outName, 'wb') as f:
     pickle.dump(data_to_save, f)

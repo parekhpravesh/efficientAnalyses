@@ -1,7 +1,9 @@
 %% Use datastore and tall arrays to calculate mean and standard deviation
 % Loading prespecified field named data
-toWork = '/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat';
-fds    = fileDatastore(toWork, 'ReadFcn', @(x) getfield(load(x, 'data'), 'data'), 'UniformRead', true);
+workDir = fileparts(mfilename('fullpath'));
+inDir   = fullfile(workDir, 'samples', 'NIfTI');
+toWork  = fullfile(inDir, 'concatedData_73_uncompressed.mat');
+fds     = fileDatastore(toWork, 'ReadFcn', @(x) getfield(load(x, 'data'), 'data'), 'UniformRead', true);
 
 % Disable creation of parallel pool
 mapreducer(0);

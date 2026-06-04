@@ -1,33 +1,54 @@
-%% Benchmark reading ABCDlike tabulated data
+%% Code to benchmark reading tabulated data
 %% Settings
-workDir = '/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples';
+% Set paths, relative to this script
+workDir     = fileparts(mfilename('fullpath'));
+inDir       = fullfile(workDir, 'samples');
+resultsDir  = fullfile(workDir, 'results');
+if ~exist(resultsDir, 'dir')
+    mkdir(resultsDir);
+end
+
 fname1  = 'ABCDlike_tabulated_DK40_33794_70';
 fname2  = 'ABCDlike_tabulated_GP_32945_335';
 
 %% First benchmark - ABCDlike_tabulated_DK40_33794_70
-fcsv     = @() readtable(fullfile(workDir,   [fname1, '.csv']));
-fParquet = @() parquetread(fullfile(workDir, [fname1, '.parquet']));
+fcsv     = @() readtable(fullfile(inDir,   [fname1, '.csv']));
+fParquet = @() parquetread(fullfile(inDir, [fname1, '.parquet']));
 
 % Get robust timing using timeit
 tReadCSV_DK40_33794_70     = timeit(fcsv);
 tReadParquet_DK40_33794_70 = timeit(fParquet);
 
 %% Second benchmark - ABCDlike_tabulated_GP_32945_335
-fcsv     = @() readtable(fullfile(workDir,   [fname2, '.csv']));
-fParquet = @() parquetread(fullfile(workDir, [fname2, '.parquet']));
+fcsv     = @() readtable(fullfile(inDir,   [fname2, '.csv']));
+fParquet = @() parquetread(fullfile(inDir, [fname2, '.parquet']));
 
 % Get robust timing using timeit
 tReadCSV_GP_32945_335     = timeit(fcsv);
 tReadParquet_GP_32945_335 = timeit(fParquet);
 
-save('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readTabulated_MATLAB.mat');
+%% Make a results table
+results      = cell(2, 4);
 
-% %% Read csv format
-% tInit    = tic;
-% data1    = readtable(fullfile(workDir, 'ABCDlike_tabulated.csv'));
-% tReadCSV = toc(tInit);
-% 
-% %% Read parquet format
-% tInit        = tic;
-% data2        = parquetread(fullfile(workDir, 'ABCDlike_tabulated.parquet'));
-% tReadParquet = toc(tInit);
+% File names
+results{1,1} = fname1;
+results{2,1} = fname2;
+
+% Performance of readtable
+results{1,2} = tReadCSV_DK40_33794_70;
+results{2,2} = tReadCSV_GP_32945_335;
+
+% Performance of parquetread
+results{1,3} = tReadParquet_DK40_33794_70;
+results{2,3} = tReadParquet_GP_32945_335;
+
+% Speed-up factor
+results{1,4} = tReadCSV_DK40_33794_70 ./ tReadParquet_DK40_33794_70;
+results{2,4} = tReadCSV_GP_32945_335  ./ tReadParquet_GP_32945_335;
+
+% Make a table
+results = cell2table(results, 'VariableNames', {'FileName', 'tReadCSV', 'tReadParquet', 'Parquet_SpeedUp'});
+
+%% Save results
+clear f*
+save(fullfile(resultsDir, 'benchmarks_readTabulated_MATLAB.mat'));

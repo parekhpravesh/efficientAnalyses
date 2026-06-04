@@ -10,8 +10,16 @@ import numpy
 import timeit
 import statsmodels
 import sklearn
+import os
 import statistics
 import pickle
+
+# Resolve paths relative to this script
+workDir    = os.path.realpath(__file__)
+resultsDir = os.path.join(workDir, "results")
+
+if not os.path.exists(resultsDir)
+    os.makedirs(resultsDir)
 
 # Settings
 number     = 1
@@ -28,7 +36,7 @@ v = 1000
 X     = numpy.column_stack((numpy.ones(n), rng.random((n, p-1))))
 beta  = rng.random((p, v))
 noise = rng.random((n, 1))
-y     = X @ beta + noise;
+y     = X @ beta + noise
 
 # Code for statsmodel
 # Even though multiple y can be given at the same time, it throws an error when calling summary
@@ -70,6 +78,7 @@ data_to_save = {
     't_normalEqn_withoutInv': t_normalEqn_withoutInv,
     't_lstsqSolve': t_lstsqSolve
 }
-    
-with open('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_linearRegression_Python.pkl', 'wb') as f:
+
+outName = os.path.join(resultsDir, "benchmarks_linearRegression_Python.pkl")
+with open(outName, 'wb') as f:
     pickle.dump(data_to_save, f)

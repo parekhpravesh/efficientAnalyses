@@ -1,4 +1,11 @@
-inDir = '/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI';
+% Set paths, relative to this script
+workDir     = fileparts(mfilename('fullpath'));
+resultsDir  = fullfile(workDir, 'results');
+if ~exist(resultsDir, 'dir')
+    mkdir(resultsDir);
+end
+
+inDir = fullfile(workDir, 'samples', 'NIfTI');
 
 % Define functions
 fUncompressed   = @() load(fullfile(inDir, 'concatedData_73_uncompressed.mat'));
@@ -15,7 +22,8 @@ tRead_compressedH5   = timeit(fCompressedH5);
 tRead_NIfTI          = timeit(fNIfTI);
 
 % Save results
-save('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readNIfTI.mat');
+clear f*
+save(fullfile(resultsDir, 'benchmarks_readNIfTI.mat'));
 
 function read_NIfTI(inDir)
 listFiles = dir(fullfile(inDir, '*.nii.gz'));

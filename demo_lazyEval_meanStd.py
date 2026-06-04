@@ -10,9 +10,11 @@ import h5py
 import dask
 import dask.array
 import dask.dataframe
+import os
 
 # Which file to work on; variable is called data
-toWork  = "/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI/concatedData_73_uncompressed.mat";
+workDir = os.path.realpath(__file__)
+toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat");
 f       = h5py.File(toWork, mode='r')
 
 # Get size of dataset
