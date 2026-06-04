@@ -60,10 +60,10 @@ for subjs = 1:length(listFiles)
 end
 
 % Make a mask
-vec_mask = logical(sum(data == 0, 1)) | logical(sum(isnan(data), 1));
+vec_mask = ~(logical(sum(data == 0, 1)) | logical(sum(isnan(data), 1)));
 
 % Flatten data and subset to mask only
-data = data(:, ~vec_mask);
+data = data(:, vec_mask);
 
 %% Save as HDF5 file
 save(fullfile(outDir, 'concatedData_73_compressed.mat'),   'data', 'vec_mask', '-v7.3');
