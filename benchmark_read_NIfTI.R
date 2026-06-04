@@ -20,7 +20,11 @@ if (!require("BiocManager", quietly = TRUE))
 {
  install.packages("BiocManager")
 }
-BiocManager::install("rhdf5")
+
+if (!require("rhdf5", quiety = TRUE))
+{
+ BiocManager::install("rhdf5")
+}
 library(rhdf5)
 
 # Get the path of this script
@@ -46,8 +50,8 @@ t_rhdf5_uncompressed  <- vector("numeric", length = numRepeats)
 for (rep in 1:numRepeats)
 {
   # Read NIfTI images
-  t_readNIfTI_oro[rep]      <- system.time(for (file in listNIfTI){nii <- readNIfTI(file.path(dir_NIfTI, file))})
-  t_readNIfTI_rnifti[rep]   <- system.time(for (file in listNIfTI){nii <- readNifti(file.path(dir_NIfTI, file))})
+  t_readNIfTI_oro[rep]      <- system.time(for (file in listNIfTI){nii <- readNIfTI(file.path(dir_NIfTI, file))})["elapsed"]
+  t_readNIfTI_rnifti[rep]   <- system.time(for (file in listNIfTI){nii <- readNifti(file.path(dir_NIfTI, file))})["elapsed"]
   t_rhdf5_compressed[rep]   <- system.time(h5read(file_compressed,   name = "/"))["elapsed"]
   t_rhdf5_uncompressed[rep] <- system.time(h5read(file_uncompressed, name = "/"))["elapsed"]
 }

@@ -14,7 +14,7 @@ import os
 
 # Which file to work on; variable is called data
 workDir = os.path.realpath(__file__)
-toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat");
+toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat")
 f       = h5py.File(toWork, mode='r')
 
 # Get size of dataset
@@ -30,3 +30,5 @@ lazy_std  = delayed_df.std(axis=1)
 
 # Get results
 [mean, std] = dask.compute(lazy_mean, lazy_std)
+
+f.close()
