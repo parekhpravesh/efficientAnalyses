@@ -28,8 +28,8 @@ numRepeats = 10
 number = 1
 
 # File paths
-mat_compressed   = os.path.join(inDir, "concatedData_73_compressed.mat")
-mat_uncompressed = os.path.join(inDir, "concatedData_73_uncompressed.mat")
+mat_compressed   = os.path.join(inDir, "concatedData_compressed.mat")
+mat_uncompressed = os.path.join(inDir, "concatedData_uncompressed.mat")
 
 # Define the loop for reading multiple NIfTI files
 listNIfTI = glob.glob(os.path.join(inDir, "*.nii*"))

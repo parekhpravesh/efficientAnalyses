@@ -8,7 +8,7 @@ Created on Fri May 29 15:11:06 2026
 
 import numpy
 import timeit
-import statsmodels
+import statsmodels.api
 import sklearn
 import os
 import statistics
@@ -66,7 +66,7 @@ t_normalEqn = timeit.repeat("numpy.linalg.pinv(X.transpose() @ X) @ (X.transpose
 t_normalEqn_withoutInv = timeit.repeat("numpy.linalg.solve(X.transpose() @ X, X.transpose() @ y)", globals=globals(), number=number, repeat=numRepeats)
 
 # Benchmark using linalg.lstsq
-t_lstsqSolve = timeit.repeat("numpy.linalg.lstsq(X, y)", globals=globals(), number=number, repeat=numRepeats)
+t_lstsqSolve = timeit.repeat("numpy.linalg.lstsq(X, y, rcond=None)", globals=globals(), number=number, repeat=numRepeats)
 
 # Show results
 print(f"Time taken: statsmodel (loop):              {statistics.median(t_statsmodel):.4f}")

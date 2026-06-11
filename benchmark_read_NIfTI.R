@@ -34,8 +34,8 @@ resultsDir <- file.path(workDir, "results")
 dir.create(resultsDir, showWarnings = FALSE, recursive = TRUE)
 
 # Paths to concatenated data
-file_compressed   <- file.path(inDir, "concatedData_73_compressed.mat")
-file_uncompressed <- file.path(inDir, "concatedData_73_uncompressed.mat")
+file_compressed   <- file.path(inDir, "concatedData_compressed.mat")
+file_uncompressed <- file.path(inDir, "concatedData_uncompressed.mat")
 
 # Make a list of NIfTI files
 listNIfTI <- list.files(inDir, pattern = glob2rx("*.nii.*"))

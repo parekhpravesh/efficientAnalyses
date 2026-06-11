@@ -70,5 +70,5 @@ vec_mask = ~(logical(sum(data == 0, 1)) | logical(sum(isnan(data), 1)));
 data = data(:, vec_mask);
 
 %% Save as HDF5 file
-save(fullfile(outDir, 'concatedData_73_compressed.mat'),   'data', 'vec_mask', '-v7.3');
-save(fullfile(outDir, 'concatedData_73_uncompressed.mat'), 'data', 'vec_mask', '-v7.3', '-nocompression');
+save(fullfile(outDir, 'concatedData_compressed.mat'),   'data', 'vec_mask', '-v7.3');
+save(fullfile(outDir, 'concatedData_uncompressed.mat'), 'data', 'vec_mask', '-v7.3', '-nocompression');

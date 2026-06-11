@@ -44,7 +44,7 @@ else
             else
                 p               = inputParser;
                 p.KeepUnmatched = true;
-                validationFcn   = @(s) isstring(s) | ischar(s) | isnumeric(s);
+                validationFcn   = @(s) isstring(s) || ischar(s) || isnumeric(s);
 
                 switch lower(command)
                     case 'generate'

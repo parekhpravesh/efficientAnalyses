@@ -16,10 +16,10 @@ if ~exist(resultsDir, 'dir')
 end
 
 % Define functions
-fUncompressed   = @() load(fullfile(inDir, 'concatedData_73_uncompressed.mat'), 'data', 'vec_mask');
-fCompressed     = @() load(fullfile(inDir, 'concatedData_73_compressed.mat'), 'data', 'vec_mask');
-fUncompressedH5 = @() h5read_mat(fullfile(inDir, 'concatedData_73_uncompressed.mat'));
-fCompressedH5   = @() h5read_mat(fullfile(inDir, 'concatedData_73_compressed.mat'));
+fUncompressed   = @() load(fullfile(inDir, 'concatedData_uncompressed.mat'), 'data', 'vec_mask');
+fCompressed     = @() load(fullfile(inDir, 'concatedData_compressed.mat'), 'data', 'vec_mask');
+fUncompressedH5 = @() h5read_mat(fullfile(inDir, 'concatedData_uncompressed.mat'));
+fCompressedH5   = @() h5read_mat(fullfile(inDir, 'concatedData_compressed.mat'));
 fNIfTI          = @() read_NIfTI(inDir);
 
 % Get robust timing using timeit
@@ -73,7 +73,7 @@ for ii = 1:length(toLoad)
         res{ii} = H5D.read(did);
         H5D.close(did);
     catch
-        H5F.close(fid);
+        warning(['Failed to load: ', toLoad{ii}]);
     end
 end
 H5F.close(fid);
