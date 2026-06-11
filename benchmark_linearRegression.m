@@ -35,6 +35,13 @@ tSolve_linsolve             = timeit(f_solve_linsolve);
 tSolve_normalEqn            = timeit(f_solve_normalEqn);
 tSolve_normalEqn_withoutInv = timeit(f_solve_normalEqn_withoutInv);
 
+% Show results
+disp(['Time taken: fitlm (loop): ',                  num2str(tSolve_fitlm)]);
+disp(['Time taken: backslash operator: ',            num2str(tSolve_mldivide)]);
+disp(['Time taken: linsolve: ',                      num2str(tSolve_linsolve)]);
+disp(['Time taken: normal equation with pinv: ',     num2str(tSolve_normalEqn)]);
+disp(['Time taken: normal equation avoiding pinv: ', num2str(tSolve_normalEqn_withoutInv)]);
+
 % %% Make sure betas are equivalent
 % beta_fitlm     = solve_fitlm(X, y);
 % beta_mldivide  = solve_mldivide(X, y);
@@ -45,7 +52,7 @@ tSolve_normalEqn_withoutInv = timeit(f_solve_normalEqn_withoutInv);
 clear X y f*
 
 %% Save results
-save(fullfile(results_dir, 'benchmarks_linearRegression.mat'));
+save(fullfile(resultsDir, 'benchmarks_linearRegression.mat'));
 
 function beta = solve_fitlm(X, y)
 % Initialize

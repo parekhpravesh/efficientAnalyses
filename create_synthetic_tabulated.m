@@ -15,6 +15,10 @@ function create_synthetic_tabulated(numSamples, numColumns, outDir, outSuffix, s
 % The tabulated data is saved as a csv and as a parquet file
 
 %% Check inputs
+if ~exist('outDir', 'var') || isempty(outDir)
+    outDir = fullfile(fileparts(mfilename('fullpath')), 'samples');
+end
+
 if ~exist('outSuffix', 'var') || isempty(outSuffix)
     outSuffix = '';
 end
@@ -58,5 +62,8 @@ data.session_id     = eid;
 data                = movevars(data, {'participant_id', 'family_id', 'session_id'}, 'Before', 'y_001');
 
 %% Save in different formats
+if ~exist(outDir, 'dir')
+    mkdir(outDir);
+end
 writetable(data, fullfile(outDir, ['ABCDlike_tabulated', outSuffix, '.csv']));
 parquetwrite(fullfile(outDir,     ['ABCDlike_tabulated', outSuffix, '.parquet']), data);

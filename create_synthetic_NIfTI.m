@@ -13,6 +13,10 @@ function create_synthetic_NIfTI(numSubjects, spmDir, outDir, seed)
 % compressed HDF5 file and uncompressed HDF5 file
 
 %% Check inputs
+if ~exist('outDir', 'var') || isempty(outDir)
+    outDir = fullfile(fileparts(mfilename('fullpath')), 'samples', 'NIfTI');
+end
+
 % Set seed
 if ~exist('seed', 'var') || isempty(seed)
     rng(20260528, 'twister');

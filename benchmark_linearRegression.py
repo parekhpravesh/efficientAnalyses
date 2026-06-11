@@ -18,7 +18,7 @@ import pickle
 workDir    = os.path.dirname(os.path.realpath(__file__))
 resultsDir = os.path.join(workDir, "results")
 
-if not os.path.exists(resultsDir)
+if not os.path.exists(resultsDir):
     os.makedirs(resultsDir)
 
 # Settings

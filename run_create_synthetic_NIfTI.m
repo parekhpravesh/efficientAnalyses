@@ -1,4 +1,24 @@
-numSubjects = 100;
-spmDir      = '/Applications/Toolboxes/spm12';
-outDir      = '/Users/praveshp/github/efficientAnalyses/efficientAnalyses/samples/NIfTI';
-create_synthetic_NIfTI(numSubjects, spmDir, outDir);
+% Set paths, relative to this script
+workDir = fileparts(mfilename('fullpath'));
+outDir  = fullfile(workDir, 'samples', 'NIfTI');
+
+if ~exist(outDir, 'dir')
+    mkdir(outDir);
+end
+
+% Change path, if needed
+if ~exist('generateSamples.m', 'file')
+    tmpDir = pwd;
+    cd(workDir);
+else
+    tmpDir = '';
+end
+
+% Now call generateSamples
+spmDir = '/Applications/Toolboxes/spm12';
+generateSamples('nifti', 100, spmDir, outDir);
+
+% Change directory again, if required
+if ~isempty(tmpDir)
+    cd(tmpDir);
+end

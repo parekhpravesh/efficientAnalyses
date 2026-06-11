@@ -21,6 +21,13 @@ tRead_uncompressedH5 = timeit(fUncompressedH5);
 tRead_compressedH5   = timeit(fCompressedH5);
 tRead_NIfTI          = timeit(fNIfTI);
 
+% Show results
+disp(['Time taken: read NIfTI: ',                    num2str(tRead_NIfTI)]);
+disp(['Time taken: read compressed HDF5 (load): ',   num2str(tRead_compressed)]);
+disp(['Time taken: read uncompressed HDF5 (load): ', num2str(tRead_uncompressed)]);
+disp(['Time taken: read compressed HDF5 (h5): ',     num2str(tRead_compressedH5)]);
+disp(['Time taken: read uncompressed HDF5 (h5): ',   num2str(tRead_uncompressedH5)]);
+
 % Save results
 clear f*
 save(fullfile(resultsDir, 'benchmarks_readNIfTI.mat'));

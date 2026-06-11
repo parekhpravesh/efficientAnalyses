@@ -22,6 +22,10 @@ f_solve2 = @() doSolve_fast(A, B, C);
 tMultiply_slow = timeit(f_solve1);
 tMultiply_fast = timeit(f_solve2);
 
+% Show results
+disp(['Time taken: slow multiplication: ', num2str(tMultiply_slow)]);
+disp(['Time taken: fast multiplication: ', num2str(tMultiply_fast)]);
+
 clear A B C f*
 
 % Save results

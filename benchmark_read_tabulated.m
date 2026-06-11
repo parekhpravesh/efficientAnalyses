@@ -46,6 +46,13 @@ results{2,3} = tReadParquet_GP_32945_335;
 results{1,4} = tReadCSV_DK40_33794_70 ./ tReadParquet_DK40_33794_70;
 results{2,4} = tReadCSV_GP_32945_335  ./ tReadParquet_GP_32945_335;
 
+% Show results
+disp(['Time taken: read CSV DK40_33794_70: ',     num2str(tReadCSV_DK40_33794_70)]);
+disp(['Time taken: read parquet DK40_33794_70: ', num2str(tReadParquet_DK40_33794_70)]);
+
+disp(['Time taken: read CSV GP_32945_335: ',     num2str(tReadCSV_GP_32945_335)]);
+disp(['Time taken: read parquet GP_32945_335: ', num2str(tReadParquet_GP_32945_335)]);
+
 % Make a table
 results = cell2table(results, 'VariableNames', {'FileName', 'tReadCSV', 'tReadParquet', 'Parquet_SpeedUp'});
 
