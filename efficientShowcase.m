@@ -60,26 +60,32 @@ else
 
                                 % Parse inputs
                                 parse(p, varargin{:});
-                                
+
+                                % Assign outputs
+                                numSamples = p.Results.numSamples;
+                                numColumns = p.Results.numColumns;
+                                outDir     = p.Results.outDir;
+                                outSuffix  = p.Results.outSuffix;
+                                seed       = p.Results.seed;
+
+                                % Convert to numeric, if required
                                 if isdeployed
-                                    if ~isnumeric(p.Results.numSamples)
-                                        p.Results.numSamples = str2double(p.Results.numSamples);
+                                    if ~isnumeric(numSamples)
+                                        numSamples = str2double(numSamples);
                                     end
-                                    if ~isnumeric(p.Results.numColumns)
-                                        p.Results.numColumns = str2double(p.Results.numColumns);
+                                    if ~isnumeric(numColumns)
+                                        numColumns = str2double(numColumns);
                                     end
-                                    if ~isnumeric(p.Results.seed)
-                                    p.Results.seed = str2double(p.Results.seed);
+                                    if ~isnumeric(seed)
+                                    seed = str2double(seed);
                                     end
                                 end
 
                                 % Call create_synthetic_tabulated
                                 disp('Calling create_synthetic_tabulated');
-                                create_synthetic_tabulated(p.Results.numSamples, ...
-                                                           p.Results.numColumns, ...
-                                                           p.Results.outDir,     ...
-                                                           p.Results.outSuffix,  ...
-                                                           p.Results.seed);
+                                create_synthetic_tabulated(numSamples, numColumns, ...
+                                                           outDir,     outSuffix,  ...
+                                                           seed);
                                 disp('Completed');
 
                             case 'nifti'
@@ -93,21 +99,26 @@ else
                                 % Parse inputs
                                 parse(p, varargin{:});
 
+                                % Assign outputs
+                                numSubjects = p.Results.numSubjects;
+                                spmDir      = p.Results.spmDir;
+                                outDir      = p.Results.outDir;
+                                seed        = p.Results.seed;
+
+                                % Convert to numeric, if required
                                 if isdeployed
-                                    if ~isnumeric(p.Results.numSubjects)
-                                        p.Results.numSubjects = str2double(p.Results.numSubjects);
+                                    if ~isnumeric(numSubjects)
+                                        numSubjects = str2double(numSubjects);
                                     end
-                                    if ~isnumeric(p.Results.seed)
-                                        p.Results.seed = str2double(p.Results.seed);
+                                    if ~isnumeric(seed)
+                                        seed = str2double(seed);
                                     end
                                 end
 
                                 % Call create_synthetic_NIfTI
                                 disp('Calling create_synthetic_NIfTI');
-                                create_synthetic_NIfTI(p.Results.numSubjects, ...
-                                                       p.Results.spmDir,      ...
-                                                       p.Results.outDir,      ...
-                                                       p.Results.seed);
+                                create_synthetic_NIfTI(numSubjects, spmDir, ...
+                                                       outDir, seed);
                                 disp('Completed');
                         end
 
