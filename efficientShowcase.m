@@ -42,10 +42,9 @@ else
                 disp(['Unknown module specified: ', moduleName, '; see help below:']);
                 showHelp('generic');
             else
-                p                 = inputParser;
-                p.KeepUnmatched   = true;
-                validationFcn_str = @(s) isstring(s) | ischar(s);
-                validationFcn_num = @(s) isnumeric(s);
+                p               = inputParser;
+                p.KeepUnmatched = true;
+                validationFcn   = @(s) isstring(s) | ischar(s) | isnumeric(s);
 
                 switch lower(command)
                     case 'generate'
@@ -53,14 +52,26 @@ else
                             case 'tabulated'
                                 showHelp('genTabulated');
                                 % Add positional and optional required arguments
-                                addRequired(p, 'numSamples', validationFcn_num);
-                                addRequired(p, 'numColumns', validationFcn_num);
-                                addOptional(p, 'outDir',     '', validationFcn_str);
-                                addOptional(p, 'outSuffix',  '', validationFcn_str);
-                                addOptional(p, 'seed',       20260527, validationFcn_num);
+                                addRequired(p, 'numSamples', validationFcn);
+                                addRequired(p, 'numColumns', validationFcn);
+                                addOptional(p, 'outDir',     '', validationFcn);
+                                addOptional(p, 'outSuffix',  '', validationFcn);
+                                addOptional(p, 'seed',       20260527, validationFcn);
 
                                 % Parse inputs
                                 parse(p, varargin{:});
+                                
+                                if isdeployed
+                                    if ~isnumeric(p.Results.numSamples)
+                                        p.Results.numSamples = str2double(p.Results.numSamples);
+                                    end
+                                    if ~isnumeric(p.Results.numColumns)
+                                        p.Results.numColumns = str2double(p.Results.numColumns);
+                                    end
+                                    if ~isnumeric(p.Results.seed)
+                                    p.Results.seed = str2double(p.Results.seed);
+                                    end
+                                end
 
                                 % Call create_synthetic_tabulated
                                 disp('Calling create_synthetic_tabulated');
@@ -74,13 +85,22 @@ else
                             case 'nifti'
                                 showHelp('genNIfTI');
                                 % Add positional and optional required arguments
-                                addRequired(p, 'numSubjects', validationFcn_num);
-                                addRequired(p, 'spmDir',      validationFcn_str);
-                                addOptional(p, 'outDir',      '', validationFcn_str);
-                                addOptional(p, 'seed',        20260528, validationFcn_num);
+                                addRequired(p, 'numSubjects', validationFcn);
+                                addRequired(p, 'spmDir',      validationFcn);
+                                addOptional(p, 'outDir',      '', validationFcn);
+                                addOptional(p, 'seed',        20260528, validationFcn);
 
                                 % Parse inputs
                                 parse(p, varargin{:});
+
+                                if isdeployed
+                                    if ~isnumeric(p.Results.numSubjects)
+                                        p.Results.numSubjects = str2double(p.Results.numSubjects);
+                                    end
+                                    if ~isnumeric(p.Results.seed)
+                                        p.Results.seed = str2double(p.Results.seed);
+                                    end
+                                end
 
                                 % Call create_synthetic_NIfTI
                                 disp('Calling create_synthetic_NIfTI');

@@ -14,9 +14,9 @@ else
     tmpDir = '';
 end
 
-% Now call generateSamples
+% Now call efficientShowcase
 spmDir = '/Applications/Toolboxes/spm12';
-generateSamples('nifti', 100, spmDir, outDir);
+efficientShowcase('generate', 'nifti', 100, spmDir, outDir);
 
 % Change directory again, if required
 if ~isempty(tmpDir)
