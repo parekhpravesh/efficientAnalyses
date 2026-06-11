@@ -40,15 +40,13 @@ for file in listNIfTI:
 
 # Define code for reading h5 files
 code_h5compressed = """
-f = h5py.File(mat_compressed, 'r')
-variables = {name: f[name][()] for name in f.keys()}
-f.close()
+with h5py.File(mat_compressed, 'r') as f:
+    variables = {name: f[name][()] for name in f.keys()}
 """
 
 code_h5uncompressed = """
-f = h5py.File(mat_uncompressed, 'r')
-variables = {name: f[name][()] for name in f.keys()}
-f.close()
+with h5py.File(mat_uncompressed, 'r') as f:
+    variables = {name: f[name][()] for name in f.keys()}
 """
 
 # Time the reading of NIfTI

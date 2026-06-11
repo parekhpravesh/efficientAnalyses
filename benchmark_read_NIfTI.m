@@ -73,7 +73,6 @@ for ii = 1:length(toLoad)
         res{ii} = H5D.read(did);
         H5D.close(did);
     catch
-        H5D.close(did);
         H5F.close(fid);
     end
 end

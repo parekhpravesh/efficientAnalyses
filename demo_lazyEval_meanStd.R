@@ -33,5 +33,5 @@ voxelAverages <- colMeans2(dataset_delayed)
 voxelStd <- colSds(dataset_delayed)
 
 # Show results
-cat(paste0("Mean of the data is: ",               round(voxelAverages, 4), "\n"))
-cat(paste0("Standard deviation of the data is: ", round(voxelStd, 4), "\n"))
+cat(paste0("Mean of the data is (showing first 5 values): ",               round(voxelAverages[1:5], 4), "\n"))
+cat(paste0("Standard deviation of the data is (showing first 5 values): ", round(voxelStd[1:5], 4), "\n"))

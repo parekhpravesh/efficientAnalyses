@@ -21,6 +21,9 @@ workDir    = os.path.dirname(os.path.realpath(__file__))
 inDir      = os.path.join(workDir, "samples")
 resultsDir = os.path.join(workDir, "results")
 
+if not os.path.exists(resultsDir):
+    os.makedirs(resultsDir)
+
 # Settings
 toRead_CSV_DK40_33794_70     = os.path.join(inDir, "ABCDlike_tabulated_DK40_33794_70.csv")
 toRead_parquet_DK40_33794_70 = os.path.join(inDir, "ABCDlike_tabulated_DK40_33794_70.parquet")
@@ -98,6 +101,6 @@ with open(outName, 'wb') as f:
     
     
 # To open
-# with open('/Users/praveshp/github/efficientAnalyses/efficientAnalyses/results/benchmarks_readTabulated_Python.pkl', 'rb') as f:
+# with open('XX.pkl', 'rb') as f:
 #     loaded_data = pickle.load(f)
 # globals().update(loaded_data)

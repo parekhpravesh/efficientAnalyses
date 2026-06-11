@@ -74,5 +74,5 @@ cat(paste0("Time taken: normal equation (without pinv): ",  round(median(t_linRe
 
 
 # Clear up and save
-rm(X, y, beta)
+rm(X, y, beta, noise)
 save.image(file=file.path(resultsDir, "benchmarks_linRegression_R.rdata"))

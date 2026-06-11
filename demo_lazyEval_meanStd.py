@@ -29,8 +29,8 @@ with h5py.File(toWork, mode='r') as f:
 
 
 # Show the results
-print(f"Mean of the data is: {mean}")
-print(f"Standard deviation of the data is: {std}")
+print(f"Mean of the data is (showing first 5 values): {mean[:5]}")
+print(f"Standard deviation of the data is (showing first 5 values): {std[:5]}")
 
 # Older solution:
 # Open the file

@@ -7,7 +7,7 @@ if ~exist(outDir, 'dir')
 end
 
 % Change path, if needed
-if ~exist('generateSamples.m', 'file')
+if ~exist('efficientShowcase.m', 'file')
     tmpDir = pwd;
     cd(workDir);
 else

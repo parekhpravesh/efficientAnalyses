@@ -120,6 +120,10 @@ else
                                 create_synthetic_NIfTI(numSubjects, spmDir, ...
                                                        outDir, seed);
                                 disp('Completed');
+
+                            otherwise
+                                disp('Incorrect command and module name combination; see help below:');
+                                showHelp('generic');
                         end
 
                     case 'benchmark'
@@ -177,6 +181,11 @@ else
                                 disp('Calling benchmark_linearRegression');
                                 benchmark_linearRegression(p.Results.resultsDir);
                                 disp('Completed');
+
+                            otherwise
+                                disp('Incorrect command and module name combination; see help below:');
+                                showHelp('generic');
+
                         end
 
                     case 'demo'
@@ -193,6 +202,11 @@ else
                                 disp('Calling demo_lazyEval_meanStd');
                                 demo_lazyEval_meanStd(p.Results.inDir);
                                 disp('Completed');
+
+                            otherwise
+                                disp('Incorrect command and module name combination; see help below:');
+                                showHelp('generic');
+
                         end
                 end
             end
@@ -238,17 +252,27 @@ switch helpType
 
     case 'benchTabulated'
         disp('Syntax: efficientShowcase benchmark tabulated inputDir outputDir');
+        disp('Parameters are position specific');
+        disp('<inputDir> and <outputDir> are optional');
 
     case 'benchNIfTI'
         disp('Syntax: efficientShowcase benchmark nifti inputDir outputDir');
+        disp('Parameters are position specific');
+        disp('<inputDir> and <outputDir> are optional');
 
     case 'benchMultiplication'
         disp('Syntax: efficientShowcase benchmark multiplication outputDir');
+        disp('Parameters are position specific');
+        disp('<outputDir> is optional');
 
     case 'benchRegression'
         disp('Syntax: efficientShowcase benchmark regression outputDir');
+        disp('Parameters are position specific');
+        disp('<outputDir> is optional');
 
     case 'lazy'
         disp('Syntax: efficientShowcase demo lazy inputDir');
+        disp('Parameters are position specific');
+        disp('<inputDir> is optional');
 end
 end

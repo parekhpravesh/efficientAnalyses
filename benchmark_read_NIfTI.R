@@ -1,10 +1,10 @@
-if (!require(oro.nifti, quietly = TRUE))
+if (!require("oro.nifti", quietly = TRUE))
 {
   install.packages("oro.nifti")
 }
 library(oro.nifti)
 
-if (!require(RNifti, quietly = TRUE))
+if (!require("RNifti", quietly = TRUE))
 {
   install.packages("RNifti")
 }
