@@ -1,10 +1,10 @@
 # Get data.table and arrow packages
-if (!require(data.table, quietly = TRUE))
+if (!require("data.table", quietly = TRUE))
 {
   install.packages("data.table")
 }
 library("data.table")
-if (!require(arrow, quietly = TRUE))
+if (!require("arrow", quietly = TRUE))
 {
   install.packages("arrow")
 }

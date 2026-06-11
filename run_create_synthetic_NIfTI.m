@@ -15,7 +15,11 @@ else
 end
 
 % Now call efficientShowcase
-spmDir = '/Applications/Toolboxes/spm12';
+% spmDir = '/Applications/Toolboxes/spm12';
+spmDir = 'This needs to be replaced with SPM12/SPM25 folder';
+if ~exist(spmDir, 'dir')
+    error('Unable to find SPM12/SPM25 directory; spmDir needs to be set in the script');
+end
 efficientShowcase('generate', 'nifti', 100, spmDir, outDir);
 
 % Change directory again, if required
