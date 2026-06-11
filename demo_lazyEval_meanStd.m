@@ -6,7 +6,7 @@ if ~exist('inDir', 'var') || isempty(inDir)
 end
 
 % Loading prespecified field named data
-toWork  = fullfile(inDir, 'concatedData_73_uncompressed.mat');
+toWork  = fullfile(inDir, 'concatedData_uncompressed.mat');
 fds     = fileDatastore(toWork, 'ReadFcn', @(x) getfield(load(x, 'data'), 'data'), 'UniformRead', true);
 
 % Disable creation of parallel pool

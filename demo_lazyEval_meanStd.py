@@ -14,7 +14,7 @@ import os
 
 # Which file to work on; variable is called data
 workDir = os.path.dirname(os.path.realpath(__file__))
-toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_73_uncompressed.mat")
+toWork  = os.path.join(workDir, "samples", "NIfTI", "concatedData_uncompressed.mat")
 
 # Keep file open while reading
 with h5py.File(toWork, mode='r') as f:
