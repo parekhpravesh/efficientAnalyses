@@ -123,40 +123,75 @@ else
                         end
 
                     case 'benchmark'
-                        % No inputs to be parsed
                         switch moduleName
                             case 'tabulated'
                                 showHelp('benchTabulated');
+                                % Add optional arguments
+                                addOptional(p, 'inDir',      '', validationFcn);
+                                addOptional(p, 'resultsDir', '', validationFcn);
+
+                                % Parse inputs
+                                parse(p, varargin{:});
+
+                                % Call benchmark_read_tabulated
                                 disp('Calling benchmark_read_tabulated');
-                                benchmark_read_tabulated;
+                                benchmark_read_tabulated(p.Results.inDir, p.Results.resultsDir);
                                 disp('Completed');
 
                             case 'nifti'
                                 showHelp('benchNIfTI');
+                                % Add optional arguments
+                                addOptional(p, 'inDir',      '', validationFcn);
+                                addOptional(p, 'resultsDir', '', validationFcn);
+
+                                % Parse inputs
+                                parse(p, varargin{:});
+
+                                % Call benchmark_read_NIfTI
                                 disp('Calling benchmark_read_NIfTI');
-                                benchmark_read_NIfTI;
+                                benchmark_read_NIfTI(p.Results.inDir, p.Results.resultsDir);
                                 disp('Completed');
 
                             case 'multiplication'
                                 showHelp('benchMultiplication');
+                                % Add optional arguments
+                                addOptional(p, 'resultsDir', '', validationFcn);
+
+                                % Parse inputs
+                                parse(p, varargin{:});
+
+                                % Call benchmark_matMultiplication
                                 disp('Calling benchmark_matMultiplication');
-                                benchmark_matMultiplication;
+                                benchmark_matMultiplication(p.Results.resultsDir);
                                 disp('Completed');
 
                             case 'regression'
                                 showHelp('benchRegression');
+                                % Add optional arguments
+                                addOptional(p, 'resultsDir', '', validationFcn);
+
+                                % Parse inputs
+                                parse(p, varargin{:});
+
+                                % Call benchmark_linearRegression
                                 disp('Calling benchmark_linearRegression');
-                                benchmark_linearRegression;
+                                benchmark_linearRegression(p.Results.resultsDir);
                                 disp('Completed');
                         end
 
                     case 'demo'
-                        % No inputs to be parsed
                         switch moduleName
                             case 'lazy'
                                 showHelp('lazy');
+                                % Add optional arguments
+                                addOptional(p, 'inDir', '', validationFcn);
+
+                                % Parse inputs
+                                parse(p, varargin{:});
+
+                                % Call demo_lazyEval_meanStd
                                 disp('Calling demo_lazyEval_meanStd');
-                                demo_lazyEval_meanStd;
+                                demo_lazyEval_meanStd(p.Results.inDir);
                                 disp('Completed');
                         end
                 end
@@ -202,18 +237,18 @@ switch helpType
         disp('<seed> is optional');
 
     case 'benchTabulated'
-        disp('Syntax: efficientShowcase benchmark tabulated');
+        disp('Syntax: efficientShowcase benchmark tabulated inputDir outputDir');
 
     case 'benchNIfTI'
-        disp('Syntax: efficientShowcase benchmark nifti');
+        disp('Syntax: efficientShowcase benchmark nifti inputDir outputDir');
 
     case 'benchMultiplication'
-        disp('Syntax: efficientShowcase benchmark multiplication');
+        disp('Syntax: efficientShowcase benchmark multiplication outputDir');
 
     case 'benchRegression'
-        disp('Syntax: efficientShowcase benchmark regression');
+        disp('Syntax: efficientShowcase benchmark regression outputDir');
 
     case 'lazy'
-        disp('Syntax: efficientShowcase demo lazy');
+        disp('Syntax: efficientShowcase demo lazy inputDir');
 end
 end
