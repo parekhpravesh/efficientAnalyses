@@ -59,6 +59,23 @@ t_pandasPQ_GP_32945_335   = timeit.repeat("pandas.read_parquet(toRead_parquet_GP
 t_polarsPQ_GP_32945_335   = timeit.repeat("polars.read_parquet(toRead_parquet_GP_32945_335)", globals=globals(), number=number, repeat=numRepeats)
 
 
+# Show results
+print(f"Time taken: read CSV DK40_33794_70 (pandas):      {statistics.median(t_pandasCSV_DK40_33794_70):.4f}")
+print(f"Time taken: read CSV DK40_33794_70 (pyarrow):     {statistics.median(t_pyarrowCSV_DK40_33794_70):.4f}")
+print(f"Time taken: read CSV DK40_33794_70 (polars):      {statistics.median(t_polarsCSV_DK40_33794_70):.4f}")
+
+print(f"Time taken: read parquet DK40_33794_70 (pandas):  {statistics.median(t_pyarrowPQ_DK40_33794_70):.4f}")
+print(f"Time taken: read parquet DK40_33794_70 (pyarrow): {statistics.median(t_pandasPQ_DK40_33794_70):.4f}")
+print(f"Time taken: read parquet DK40_33794_70 (polars):  {statistics.median(t_polarsPQ_DK40_33794_70):.4f}")
+
+print(f"Time taken: read CSV GP_32945_335 (pandas):       {statistics.median(t_pandasCSV_GP_32945_335):.4f}")
+print(f"Time taken: read CSV GP_32945_335 (pyarrow):      {statistics.median(t_pyarrowCSV_GP_32945_335):.4f}")
+print(f"Time taken: read CSV GP_32945_335 (polars):       {statistics.median(t_polarsCSV_GP_32945_335):.4f}")
+
+print(f"Time taken: read parquet GP_32945_335 (pandas):   {statistics.median(t_pandasPQ_GP_32945_335):.4f}")
+print(f"Time taken: read parquet GP_32945_335 (pyarrow):  {statistics.median(t_pyarrowPQ_GP_32945_335):.4f}")
+print(f"Time taken: read parquet GP_32945_335 (polars):   {statistics.median(t_polarsPQ_GP_32945_335):.4f}")
+
 # Save for future
 data_to_save = {
     't_pandasCSV_DK40_33794_70': t_pandasCSV_DK40_33794_70,

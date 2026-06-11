@@ -58,6 +58,11 @@ t_readNIfTI = timeit.repeat(code_loop, globals=globals(), number=number, repeat=
 t_readCompressed   = timeit.repeat(code_h5compressed,   globals=globals(), number=number, repeat=numRepeats)
 t_readUncompressed = timeit.repeat(code_h5uncompressed, globals=globals(), number=number, repeat=numRepeats)
 
+# Show results
+print(f"Time taken: load (nibabel):     {statistics.median(t_readNIfTI):.4f}")
+print(f"Time taken: h5py compressed:    {statistics.median(t_readCompressed):.4f}")
+print(f"Time taken: h5py uncompressed:  {statistics.median(t_readUncompressed):.4f}")
+
 # Save for future
 data_to_save = {
     't_readNIfTI': t_readNIfTI,

@@ -65,6 +65,14 @@ for (rep in 1:numRepeats)
   t_linRegression_QRsolve[rep]          <- system.time(qr.solve(X, y))["elapsed"]
 }
 
+# Show results
+cat(paste0("Time taken: fitlm (loop): ",                    round(median(t_linRegression_lm_loop), 4), "\n"))
+cat(paste0("Time taken: fitlm (without loop): ",            round(median(t_linRegression_lm), 4), "\n"))
+cat(paste0("Time taken: qr.solve: ",                        round(median(t_linRegression_QRsolve), 4), "\n"))
+cat(paste0("Time taken: normal equation (with pinv): ",     round(median(t_linRegression_normalEqn), 4), "\n"))
+cat(paste0("Time taken: normal equation (without pinv): ",  round(median(t_linRegression_normalEqn_noInv), 4), "\n"))
+
+
 # Clear up and save
 rm(X, y, beta)
 save.image(file=file.path(resultsDir, "benchmarks_linRegression_R.rdata"))

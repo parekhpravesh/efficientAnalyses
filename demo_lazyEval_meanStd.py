@@ -31,4 +31,9 @@ lazy_std  = delayed_df.std(axis=1)
 # Get results
 [mean, std] = dask.compute(lazy_mean, lazy_std)
 
+# Close the file
 f.close()
+
+# Show the results
+print(f"Mean of the data is: {mean:.4f}")
+print(f"Standard deviation of the data is: {std:.4f}")

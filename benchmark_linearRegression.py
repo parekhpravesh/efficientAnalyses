@@ -68,6 +68,13 @@ t_normalEqn_withoutInv = timeit.repeat("numpy.linalg.solve(X.transpose() @ X, X.
 # Benchmark using linalg.lstsq
 t_lstsqSolve = timeit.repeat("numpy.linalg.lstsq(X, y)", globals=globals(), number=number, repeat=numRepeats)
 
+# Show results
+print(f"Time taken: statsmodel (loop):              {statistics.median(t_statsmodel):.4f}")
+print(f"Time taken: sklearn (loop):                 {statistics.median(t_scikitLearn_loop):.4f}")
+print(f"Time taken: sklearn (without loop):         {statistics.median(t_scikitLearn):.4f}")
+print(f"Time taken: linalg.lstsqsolve:              {statistics.median(t_lstsqSolve):.4f}")
+print(f"Time taken: normal equation (with pinv):    {statistics.median(t_normalEqn):.4f}")
+print(f"Time taken: normal equation (without pinv): {statistics.median(t_normalEqn_withoutInv):.4f}")
 
 # Save for future
 data_to_save = {

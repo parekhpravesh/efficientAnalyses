@@ -1,15 +1,23 @@
+function benchmark_read_NIfTI(inDir, resultsDir)
+%% Code to benchmark reading NIfTI files and concatenated data
 % Set paths, relative to this script
-workDir     = fileparts(mfilename('fullpath'));
-resultsDir  = fullfile(workDir, 'results');
+if ~exist('resultsDir', 'var') || isempty(resultsDir)
+    workDir     = fileparts(mfilename('fullpath'));
+    resultsDir  = fullfile(workDir, 'results');
+end
+
+if ~exist('inDir', 'var') || isempty(inDir)
+    workDir = fileparts(mfilename('fullpath'));
+    inDir   = fullfile(workDir, 'samples', 'NIfTI');
+end
+
 if ~exist(resultsDir, 'dir')
     mkdir(resultsDir);
 end
 
-inDir = fullfile(workDir, 'samples', 'NIfTI');
-
 % Define functions
-fUncompressed   = @() load(fullfile(inDir, 'concatedData_73_uncompressed.mat'));
-fCompressed     = @() load(fullfile(inDir, 'concatedData_73_compressed.mat'));
+fUncompressed   = @() load(fullfile(inDir, 'concatedData_73_uncompressed.mat'), 'data', 'vec_mask');
+fCompressed     = @() load(fullfile(inDir, 'concatedData_73_compressed.mat'), 'data', 'vec_mask');
 fUncompressedH5 = @() h5read_mat(fullfile(inDir, 'concatedData_73_uncompressed.mat'));
 fCompressedH5   = @() h5read_mat(fullfile(inDir, 'concatedData_73_compressed.mat'));
 fNIfTI          = @() read_NIfTI(inDir);
@@ -31,6 +39,7 @@ disp(['Time taken: read uncompressed HDF5 (h5): ',   num2str(tRead_uncompressedH
 % Save results
 clear f*
 save(fullfile(resultsDir, 'benchmarks_readNIfTI.mat'));
+end
 
 function read_NIfTI(inDir)
 listFiles = dir(fullfile(inDir, '*.nii.gz'));

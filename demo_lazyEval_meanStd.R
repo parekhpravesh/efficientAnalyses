@@ -31,3 +31,7 @@ voxelAverages <- colMeans2(dataset_delayed)
 
 # Calculate standard deviation per column (i.e., voxel-wise)
 voxelStd <- colSds(dataset_delayed)
+
+# Show results
+cat(paste0("Mean of the data is: ",               round(voxelAverages, 4), "\n"))
+cat(paste0("Standard deviation of the data is: ", round(voxelStd, 4), "\n"))

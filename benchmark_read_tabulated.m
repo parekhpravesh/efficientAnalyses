@@ -1,15 +1,23 @@
+function benchmark_read_tabulated(inDir, resultsDir)
 %% Code to benchmark reading tabulated data
-%% Settings
 % Set paths, relative to this script
-workDir     = fileparts(mfilename('fullpath'));
-inDir       = fullfile(workDir, 'samples');
-resultsDir  = fullfile(workDir, 'results');
+if ~exist('resultsDir', 'var') || isempty(resultsDir)
+    workDir     = fileparts(mfilename('fullpath'));
+    resultsDir  = fullfile(workDir, 'results');
+end
+
+if ~exist('inDir', 'var') || isempty(inDir)
+    workDir = fileparts(mfilename('fullpath'));
+    inDir   = fullfile(workDir, 'samples', 'NIfTI');
+end
+
 if ~exist(resultsDir, 'dir')
     mkdir(resultsDir);
 end
 
-fname1  = 'ABCDlike_tabulated_DK40_33794_70';
-fname2  = 'ABCDlike_tabulated_GP_32945_335';
+%% File names to read
+fname1 = 'ABCDlike_tabulated_DK40_33794_70';
+fname2 = 'ABCDlike_tabulated_GP_32945_335';
 
 %% First benchmark - ABCDlike_tabulated_DK40_33794_70
 fcsv     = @() readtable(fullfile(inDir,   [fname1, '.csv']));

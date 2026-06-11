@@ -1,9 +1,13 @@
+function benchmark_linearRegression(resultsDir)
 %% Demo: Linear regression
 rng(20260529, 'twister');
 
 % Set paths, relative to this script
-workDir     = fileparts(mfilename('fullpath'));
-resultsDir  = fullfile(workDir, 'results');
+if ~exist('resultsDir', 'var') || isempty(resultsDir)
+    workDir     = fileparts(mfilename('fullpath'));
+    resultsDir  = fullfile(workDir, 'results');
+end
+
 if ~exist(resultsDir, 'dir')
     mkdir(resultsDir);
 end
@@ -53,6 +57,7 @@ clear X y f*
 
 %% Save results
 save(fullfile(resultsDir, 'benchmarks_linearRegression.mat'));
+end
 
 function beta = solve_fitlm(X, y)
 % Initialize

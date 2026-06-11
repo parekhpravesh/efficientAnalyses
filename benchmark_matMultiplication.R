@@ -29,6 +29,10 @@ for (rep in 1:numRepeats)
   tMultiply_fast[rep] <- system.time(A %*% (B %*% C))["elapsed"]
 }
 
+# Show results
+cat(paste0("Time taken: slow multiplication: ", round(median(tMultiply_slow), 4), "\n"))
+cat(paste0("Time taken: fast multiplication: ", round(median(tMultiply_fast), 4), "\n"))
+
 # Clear up and save
 rm(A, B, C)
 save.image(file=file.path(resultsDir, "benchmarks_matMultiply_R.rdata"))

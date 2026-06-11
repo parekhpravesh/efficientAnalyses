@@ -71,4 +71,17 @@ for (rep in 1:numRepeats)
   tParquet_GP_32945_335[rep] <- system.time(read_parquet(toRead_parquet))["elapsed"]
 }
 
+# Show results
+cat(paste0("Time taken: read.csv DK40_33794_70: ",       round(median(tCSV_readCSV_DK40_33794_70), 4), "\n"))
+cat(paste0("Time taken: fread DK40_33794_70: ",          round(median(tCSV_fread_DK40_33794_70), 4), "\n"))
+cat(paste0("Time taken: read_csv_arrow DK40_33794_70: ", round(median(tCSV_arrow_DK40_33794_70), 4), "\n"))
+cat(paste0("Time taken: read_parquet DK40_33794_70: ",   round(median(tParquet_DK40_33794_70), 4), "\n"))
+
+cat(paste0("Time taken: read.csv GP_32945_335: ",       round(median(tCSV_readCSV_GP_32945_335), 4), "\n"))
+cat(paste0("Time taken: fread GP_32945_335: ",          round(median(tCSV_fread_GP_32945_335), 4), "\n"))
+cat(paste0("Time taken: read_csv_arrow GP_32945_335: ", round(median(tCSV_arrow_GP_32945_335), 4), "\n"))
+cat(paste0("Time taken: read_parquet GP_32945_335: ",   round(median(tParquet_GP_32945_335), 4), "\n"))
+
+
+# Save results
 save.image(file=file.path(resultsDir, "benchmarks_readTabulated_R.rdata"))

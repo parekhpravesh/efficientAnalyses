@@ -1,7 +1,11 @@
+function demo_lazyEval_meanStd(inDir)
 %% Use datastore and tall arrays to calculate mean and standard deviation
+if ~exist('inDir', 'var') || isempty(inDir)
+    workDir = fileparts(mfilename('fullpath'));
+    inDir   = fullfile(workDir, 'samples', 'NIfTI');
+end
+
 % Loading prespecified field named data
-workDir = fileparts(mfilename('fullpath'));
-inDir   = fullfile(workDir, 'samples', 'NIfTI');
 toWork  = fullfile(inDir, 'concatedData_73_uncompressed.mat');
 fds     = fileDatastore(toWork, 'ReadFcn', @(x) getfield(load(x, 'data'), 'data'), 'UniformRead', true);
 
@@ -20,3 +24,7 @@ std_data = std(data);
 % Bring the results into memory - do these at the same time to reduce
 % multiple evaluations
 [mean_data, std_data] = gather(mean_data, std_data);
+
+% Show results
+disp(['Mean of the data is: ', num2str(mean_data)]);
+disp(['Standard deviation of the data is: ', num2str(std_data)]);

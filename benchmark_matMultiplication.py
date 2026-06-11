@@ -36,6 +36,10 @@ C = rng.random((n, 1))
 tMultiply_slow = timeit.repeat("A @ B @ C", globals=globals(), number=number, repeat=numRepeats)
 tMultiply_fast = timeit.repeat("A @ (B @ C)", globals=globals(), number=number, repeat=numRepeats)
 
+# Show results
+print(f"Time taken: slow multiplication: {statistics.median(tMultiply_slow):.4f}")
+print(f"Time taken: fast multiplication: {statistics.median(tMultiply_fast):.4f}")
+
 # Save for future
 data_to_save = {
     'tMultiply_slow': tMultiply_slow,

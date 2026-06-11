@@ -1,9 +1,13 @@
+function benchmark_matMultiplication(resultsDir)
 %% Demo: (AB)C vs. A(BC)
 rng(20260529, 'twister');
 
 % Set paths, relative to this script
-workDir     = fileparts(mfilename('fullpath'));
-resultsDir  = fullfile(workDir, 'results');
+if ~exist('resultsDir', 'var') || isempty(resultsDir)
+    workDir     = fileparts(mfilename('fullpath'));
+    resultsDir  = fullfile(workDir, 'results');
+end
+
 if ~exist(resultsDir, 'dir')
     mkdir(resultsDir);
 end
@@ -30,7 +34,7 @@ clear A B C f*
 
 % Save results
 save(fullfile(resultsDir, 'benchmarks_matMultiply.mat'));
-
+end
 
 function result = doSolve_slow(A, B, C)
 result = (A * B) * C;

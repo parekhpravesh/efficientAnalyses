@@ -56,5 +56,13 @@ for (rep in 1:numRepeats)
   t_rhdf5_uncompressed[rep] <- system.time(h5read(file_uncompressed, name = "/"))["elapsed"]
 }
 
+# Show results
+cat(paste0("Time taken: readNIfTI (oro): ",       round(median(t_readNIfTI_oro), 4), "\n"))
+cat(paste0("Time taken: readNifti (RNifti): ",    round(median(t_readNIfTI_rnifti), 4), "\n"))
+cat(paste0("Time taken: h5read (compressed): ",   round(median(t_rhdf5_compressed), 4), "\n"))
+cat(paste0("Time taken: h5read (uncompressed): ", round(median(t_rhdf5_uncompressed), 4), "\n"))
+
+
+# Clear up and save
 rm(nii)
 save.image(file=file.path(resultsDir, "benchmarks_readNIfTI_R.rdata"))
