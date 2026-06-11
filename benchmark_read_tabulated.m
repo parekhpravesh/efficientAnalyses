@@ -8,7 +8,7 @@ end
 
 if ~exist('inDir', 'var') || isempty(inDir)
     workDir = fileparts(mfilename('fullpath'));
-    inDir   = fullfile(workDir, 'samples', 'NIfTI');
+    inDir   = fullfile(workDir, 'samples');
 end
 
 if ~exist(resultsDir, 'dir')

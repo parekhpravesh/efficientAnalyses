@@ -18,7 +18,7 @@ end
 efficientShowcase('generate', 'tabulated', 33794, 70, outDir, '_DK40_33794_70');
 
 % Now call efficientShowcase for the second test case
-generateSamples('generate', 'tabulated', 32945, 335, outDir, '_GP_32945_335');
+efficientShowcase('generate', 'tabulated', 32945, 335, outDir, '_GP_32945_335');
 
 % Change directory again, if required
 if ~isempty(tmpDir)

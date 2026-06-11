@@ -8,11 +8,11 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 {
   install.packages("BiocManager")
 }
-if (!require("DelayedMatrixStats", quiety = TRUE))
+if (!require("DelayedMatrixStats", quietly = TRUE))
 {
  BiocManager::install("DelayedMatrixStats")
 }
-if (!require("HDF5Array", quiety = TRUE))
+if (!require("HDF5Array", quietly = TRUE))
 {
  BiocManager::install("HDF5Array")
 }

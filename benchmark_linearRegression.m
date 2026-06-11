@@ -1,6 +1,6 @@
 function benchmark_linearRegression(resultsDir)
 %% Demo: Linear regression
-rng(20260529, 'twister');
+rng(20260526, 'twister');
 
 % Set paths, relative to this script
 if ~exist('resultsDir', 'var') || isempty(resultsDir)
@@ -84,6 +84,7 @@ end
 
 function beta = solve_normalEqn_withoutInv(X, y)
 XtX  = X' * X;
-iXtX = XtX \ eye(size(XtX));
-beta = iXtX * (X' * y);
+beta = XtX \ (X' * y);
+% iXtX = XtX \ eye(size(XtX));
+% beta = iXtX * (X' * y);
 end

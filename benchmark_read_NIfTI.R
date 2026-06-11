@@ -21,7 +21,7 @@ if (!require("BiocManager", quietly = TRUE))
  install.packages("BiocManager")
 }
 
-if (!require("rhdf5", quiety = TRUE))
+if (!require("rhdf5", quietly = TRUE))
 {
  BiocManager::install("rhdf5")
 }
@@ -38,7 +38,7 @@ file_compressed   <- file.path(inDir, "concatedData_73_compressed.mat")
 file_uncompressed <- file.path(inDir, "concatedData_73_uncompressed.mat")
 
 # Make a list of NIfTI files
-listNIfTI <- list.files(inDir, pattern = "*.nii.*")
+listNIfTI <- list.files(inDir, pattern = glob2rx("*.nii.*"))
 
 # Initialize
 numRepeats            <- 10
@@ -50,8 +50,8 @@ t_rhdf5_uncompressed  <- vector("numeric", length = numRepeats)
 for (rep in 1:numRepeats)
 {
   # Read NIfTI images
-  t_readNIfTI_oro[rep]      <- system.time(for (file in listNIfTI){nii <- readNIfTI(file.path(dir_NIfTI, file))})["elapsed"]
-  t_readNIfTI_rnifti[rep]   <- system.time(for (file in listNIfTI){nii <- readNifti(file.path(dir_NIfTI, file))})["elapsed"]
+  t_readNIfTI_oro[rep]      <- system.time(for (file in listNIfTI){nii <- readNIfTI(file.path(inDir, file))})["elapsed"]
+  t_readNIfTI_rnifti[rep]   <- system.time(for (file in listNIfTI){nii <- readNifti(file.path(inDir, file))})["elapsed"]
   t_rhdf5_compressed[rep]   <- system.time(h5read(file_compressed,   name = "/"))["elapsed"]
   t_rhdf5_uncompressed[rep] <- system.time(h5read(file_uncompressed, name = "/"))["elapsed"]
 }

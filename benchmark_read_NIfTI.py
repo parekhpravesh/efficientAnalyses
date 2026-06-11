@@ -32,7 +32,7 @@ mat_compressed   = os.path.join(inDir, "concatedData_73_compressed.mat")
 mat_uncompressed = os.path.join(inDir, "concatedData_73_uncompressed.mat")
 
 # Define the loop for reading multiple NIfTI files
-listNIfTI = glob.glob(inDir, "*.nii*")
+listNIfTI = glob.glob(os.path.join(inDir, "*.nii*"))
 code_loop = """
 for file in listNIfTI:
     nii = nibabel.load(file).get_fdata()

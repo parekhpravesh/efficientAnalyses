@@ -16,12 +16,12 @@ resultsDir <- file.path(workDir, "results")
 dir.create(resultsDir, showWarnings = FALSE, recursive = TRUE)
 
 # Settings
-n = 3000;
+n = 30000;
 p = 50;
 v = 1000;
 
 # Set seed
-set.seed(20260529)
+set.seed(20260526)
 
 # Prepare X variable and true beta coefficients
 X    = cbind(rep(1, times = n), matrix(runif(n * (p-1)), nrow = n, ncol = (p-1)))

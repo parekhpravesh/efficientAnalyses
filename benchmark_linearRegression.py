@@ -60,7 +60,7 @@ t_scikitLearn_loop = timeit.repeat(code_loop_scikitlearn, globals=globals(), num
 t_statsmodel = timeit.repeat(code_loop_statsmodel, globals=globals(), number=number, repeat=numRepeats)
 
 # Benchmark using normal equations
-t_normalEqn = timeit.repeat("numpy.linalg.pinv(X.transpose() @ X) @ X.transpose() @ y", globals=globals(), number=number, repeat=numRepeats)
+t_normalEqn = timeit.repeat("numpy.linalg.pinv(X.transpose() @ X) @ (X.transpose() @ y)", globals=globals(), number=number, repeat=numRepeats)
 
 # Benchmark using normal equations without inverse
 t_normalEqn_withoutInv = timeit.repeat("numpy.linalg.solve(X.transpose() @ X, X.transpose() @ y)", globals=globals(), number=number, repeat=numRepeats)

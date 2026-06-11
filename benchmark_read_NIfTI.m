@@ -68,9 +68,14 @@ res = cell(length(toLoad),1);
 fid = H5F.open(inFile);
 
 for ii = 1:length(toLoad)
-    did = H5D.open(fid, toLoad{ii});
-    res{ii} = H5D.read(did);
-    H5D.close(did);
+    try
+        did = H5D.open(fid, toLoad{ii});
+        res{ii} = H5D.read(did);
+        H5D.close(did);
+    catch
+        H5D.close(did);
+        H5F.close(fid);
+    end
 end
 H5F.close(fid);
 end

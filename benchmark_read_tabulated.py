@@ -64,8 +64,8 @@ print(f"Time taken: read CSV DK40_33794_70 (pandas):      {statistics.median(t_p
 print(f"Time taken: read CSV DK40_33794_70 (pyarrow):     {statistics.median(t_pyarrowCSV_DK40_33794_70):.4f}")
 print(f"Time taken: read CSV DK40_33794_70 (polars):      {statistics.median(t_polarsCSV_DK40_33794_70):.4f}")
 
-print(f"Time taken: read parquet DK40_33794_70 (pandas):  {statistics.median(t_pyarrowPQ_DK40_33794_70):.4f}")
-print(f"Time taken: read parquet DK40_33794_70 (pyarrow): {statistics.median(t_pandasPQ_DK40_33794_70):.4f}")
+print(f"Time taken: read parquet DK40_33794_70 (pandas):  {statistics.median(t_pandasPQ_DK40_33794_70):.4f}")
+print(f"Time taken: read parquet DK40_33794_70 (pyarrow): {statistics.median(t_pyarrowPQ_DK40_33794_70):.4f}")
 print(f"Time taken: read parquet DK40_33794_70 (polars):  {statistics.median(t_polarsPQ_DK40_33794_70):.4f}")
 
 print(f"Time taken: read CSV GP_32945_335 (pandas):       {statistics.median(t_pandasCSV_GP_32945_335):.4f}")
