@@ -179,7 +179,7 @@ The MATLAB code is compiled, so it does not require an active MATLAB license. Ho
     - Show an example of lazy loading of concatenated data to estimate mean and standard deviation for every voxel/vertex/connection:
 
       ```{bash}
-      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b demo lazy /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI /data/teaching/parekhpravesh/efficientAnalyses/results
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b demo lazy /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI
       ```
 
 5.  To quit the apptainer shell, press `Ctrl + D`
