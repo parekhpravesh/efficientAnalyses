@@ -1,15 +1,13 @@
-if (!require("oro.nifti", quietly = TRUE))
-{
-  install.packages("oro.nifti")
-}
-library(oro.nifti)
-
 if (!require("RNifti", quietly = TRUE))
 {
   install.packages("RNifti")
 }
 library(RNifti)
-
+if (!require("oro.nifti", quietly = TRUE))
+{
+  install.packages("oro.nifti")
+}
+library(oro.nifti)
 if (!require("this.path", quietly = TRUE))
 {
   install.packages("this.path")
