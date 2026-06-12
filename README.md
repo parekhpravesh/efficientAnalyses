@@ -152,14 +152,34 @@ The MATLAB code is compiled, so it does not require an active MATLAB license. Ho
 
 4.  The following code can be run (these are full commands which can be copy-pasted in the terminal to run):
 
-    - Benchmark different ways of performing linear regression: `./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark regression /data/teaching/parekhpravesh/efficientAnalyses/results`
+    - Benchmark different ways of performing linear regression:
 
-    - Benchmark different ways of performing matrix multiplication: `./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark multiplication /data/teaching/parekhpravesh/efficientAnalyses/results`
+      ```{bash}
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark regression /data/teaching/parekhpravesh/efficientAnalyses/results
+      ```
 
-    - Benchmark reading NIfTI files and HDF5 concatenated data format: `./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark nifti /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI /data/teaching/parekhpravesh/efficientAnalyses/results`
+    - Benchmark different ways of performing matrix multiplication:
 
-    - Benchmark different ways of reading csv and parquet files: `./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark tabulated /data/teaching/parekhpravesh/efficientAnalyses/samples /data/teaching/parekhpravesh/efficientAnalyses/results`
+      ```{bash}
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark multiplication /data/teaching/parekhpravesh/efficientAnalyses/results
+      ```
 
-    - Show an example of lazy loading of concatenated data to estimate mean and standard deviation for every voxel/vertex/connection: `./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b demo lazy /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI /data/teaching/parekhpravesh/efficientAnalyses/results`
+    - Benchmark reading NIfTI files and HDF5 concatenated data format:
+
+      ```{bash}
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark nifti /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI /data/teaching/parekhpravesh/efficientAnalyses/results
+      ```
+
+    - Benchmark different ways of reading csv and parquet files:
+
+      ```{bash}
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b benchmark tabulated /data/teaching/parekhpravesh/efficientAnalyses/samples /data/teaching/parekhpravesh/efficientAnalyses/results
+      ```
+
+    - Show an example of lazy loading of concatenated data to estimate mean and standard deviation for every voxel/vertex/connection:
+
+      ```{bash}
+      ./efficientShowcase_App_glnx64/run_efficientShowcase.sh /opt/matlabruntime/R2024b demo lazy /data/teaching/parekhpravesh/efficientAnalyses/samples/NIfTI /data/teaching/parekhpravesh/efficientAnalyses/results
+      ```
 
 5.  To quit the apptainer shell, press `Ctrl + D`
